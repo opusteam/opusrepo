@@ -1,0 +1,154 @@
+﻿@model OPUS.Domain.FinalPlanViewModel
+
+
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/FinalPlan.js"></script>
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Work Order Details</h2>
+
+
+@if (TempData["Message"] != null)
+{ <div style="color:#00a525;font-weight:bold;">@TempData["Message"]</div>}
+
+<section class="row">
+    <div class="form-group">
+        @Html.LabelFor(model => model.WorkOrderId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-12">
+            @Model.WorkOrderId
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FeasiblityType, new { @class = "col-md-2 control-label" })
+        <div class="col-md-12">
+            @Model.FeasiblityType
+        </div>
+    </div>
+</section>
+<section class="row">
+    <fieldset class="form-inputs">
+        <legend>@ViewBag.Title</legend>
+        @using (Html.BeginForm("Planning", "FinalPlan", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form", @id = "frmFinalPlan" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            @Html.ValidationSummary()
+
+            @Html.HiddenFor(model => model.FId)
+            @Html.HiddenFor(model => model.WorkOrderId)
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LinkId, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.LinkId, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FromPOC, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.FromPOC, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ToPOC, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ToPOC, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FromCoreID, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.FromCoreID, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ToCoreId, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.ToCoreId, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LinkBLinkBudget, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.LinkBLinkBudget, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Remarks, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UGdoc, new { @class = "col-md-4 control-label" })
+                    @Html.CheckBoxFor(model => model.UGdoc, new { @class = "col-md-1" })
+                    
+                    <div class="col-md-7">                        
+                        @Html.HiddenFor(i => i.UGFilesToBeUploaded)
+
+                        <div id="uploaders">
+                            <input type="file" id="UGdocFile" name="UGdocFile" multiple="multiple" style="float: left;" />
+                            <br />
+                            <span id="spnFile" style="float: left; color: #FF0000"></span>
+                            @Html.ValidationMessage("File")
+                            @Html.Hidden("hdnUGdocFileUpload")
+                        </div>
+                        <div class="control-section" style="padding: 0px;">
+                            <div id="UGdocselectedFiles"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OHdoc, new { @class = "col-md-4 control-label" })
+                    @Html.CheckBoxFor(model => model.OHdoc, new { @class = "col-md-1" })
+
+                    <div class="col-md-7">
+                        @*@Html.HiddenFor(i => i.FilesToBeUploaded)*@
+
+                        <div id="uploaders">
+                            <input type="file" id="OHdocFile" name="OHdocFile" multiple="multiple" style="float: left;" />
+                            <br />
+                            <span id="spnFile" style="float: left; color: #FF0000"></span>
+                            @Html.ValidationMessage("File")
+                            @Html.Hidden("hdnOHdocFileUpload")
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InCdoc, new { @class = "col-md-4 control-label" })
+                    @Html.CheckBoxFor(model => model.InCdoc, new { @class = "col-md-1" })
+
+                    <div class="col-md-7">
+                        @*@Html.HiddenFor(i => i.FilesToBeUploaded)*@
+
+                        <div id="uploaders">
+                            <input type="file" id="InCdocFile" name="InCdocFile" multiple="multiple" style="float: left;" />
+                            <br />
+                            <span id="spnFile" style="float: left; color: #FF0000"></span>
+                            @Html.ValidationMessage("File")
+                            @Html.Hidden("hdnInCdocFileUpload")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div class="form-group">
+                        <div class="col-md-11">
+                            <input type="button" id="btnWorkOrder" class="btn btn-primary col-md-3 pull-right" value="Submit" onclick="SaveFinalPlan('@User.Identity.Name')" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </fieldset>
+</section>

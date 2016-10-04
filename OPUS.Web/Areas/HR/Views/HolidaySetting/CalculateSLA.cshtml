@@ -1,0 +1,29 @@
+﻿@model OPUS.Domain.TmpVMSLA
+@{
+    ViewBag.Title = "CalculateSLA";
+}
+
+<h2>Calculate SLA</h2>
+@using (Html.BeginForm("CalculateSLA", "HolidaySetting", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "frmotherholidaysetting" }))
+{
+    <label>Event Id</label>
+    @Html.TextBoxFor(model=>model.eventId,new { @class= "form-control" })
+    @*<input type="text" name="eventId" id="eventId" class="form-control" />*@
+    <br />
+    <label>Event Type</label>
+    @Html.EnumDropDownListFor(model=>model.eventType,new { @class = "form-control" })
+    @*<select name="EventType" id="EventType" class="form-control">
+        <option>---Select---</option>
+        <option value="1">FeasibilityFeedBack</option>
+        <option value="2">FeasibilitySurvey</option>
+        <option value="3">FeasibilityAdditionalTechnicalInfo</option>
+        <option value="4">WorkOrder</option>
+        <option value="5">FinalPlan</option>
+        <option value="6">PlanCompletion</option>
+    </select>*@
+    <br />
+    <input type="submit" class="btn btn-primary col-md-2" value="Set Holiday" />
+}
+
+
+

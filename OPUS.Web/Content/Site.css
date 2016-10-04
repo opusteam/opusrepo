@@ -1,0 +1,129 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: auto;
+}
+fieldset {
+    border: 1px solid #ccc;
+    border-radius:5px;
+}
+
+legend {
+    font-size:14px !important;
+    width:auto;
+    border:none;
+    color:#f12369;
+    font-weight:bold;
+}
+fieldset.form-inputs {
+}
+fieldset.form-inputs legend{
+    position:relative;
+    top:10px;
+    padding:10px;
+    font-size:16px !important;
+
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.navbar-inverse {
+    background-color: #731747;
+    border-color: #080808;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #62bbe9;
+}
+.dropdown-menu {
+	background-color: #62bbe9;
+}
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.table th {
+    background-color: #044977 !important;
+	color:#fff;
+	text-transform:uppercase;
+	font-size:12px;
+  }
+table.table-inner tr td{
+	padding:5px;
+}
+table.table-inner h4{
+	font-size:14px;
+	font-weight:bold;
+	border-bottom:1px solid #ddd;
+}
+.action-links a {
+    font-size:18px;
+    padding:5px;
+    text-decoration:none;
+}
+.popover {
+ max-width:100% !important;
+}
+
+.popover-content {
+    padding: 5px;
+    background: #c7fbff;
+}
+.popover-content table tr:first-child {
+        border-bottom: 1px solid #0bcbde;
+        font-weight:bold;
+        text-align:center;
+}
+.popover-content table tr td:first-child {
+        border-right: 1px solid #0bcbde;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    cursor: not-allowed;
+    background-color: #fbe0b9;
+    opacity: 1;
+}

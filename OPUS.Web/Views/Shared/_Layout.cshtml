@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/appendGrid/css")
+    
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" id="mainmenu">
+                <ul class="nav navbar-nav" id="mainlinks">
+                    
+                   
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - OPUS</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/myscript")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/appendGrid")
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        LoadMenu('@User.Identity.Name');
+    });
+
+    function LoadMenu(username) {
+
+        if (username) {
+            $.ajax({
+                type: 'GET',
+                data: { UserName: username },
+                url: 'http://localhost:52153/Home/GetPermittedMenus',
+                success: function (response) {
+                    var link = '';
+                    $.each(JSON.parse(response), function (idx, obj) {
+
+                        link =link + '<li><a href=/' + obj.AreaName + '/' + obj.ControllerName + '/' + obj.ActionName + '>' + obj.Name + '</a></li>';
+
+                    });
+
+                    $("#mainmenu ul[id='mainlinks']").append(link);
+                }
+            });
+        } else {
+
+            $("#mainmenu ul[id='mainlinks']").append('<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" })</li>')
+                             .append('<li>@Html.ActionLink("About", "About", "Home", new { area = "" })</li>')
+                             .append(' <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle">Client <b class="caret"></b></a> <ul class="dropdown-menu"><li>@Html.ActionLink("Create Client", "NewClient", "Client", new { area = "Marketing" }, null)</li><li> @Html.ActionLink("Client List", "GetAllClientByPaging", "Client", new { area = "Marketing" }, null)  </li></ul></li>')
+                             .append('<li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Feasibility <b class="caret"></b></a><ul class="dropdown-menu"><li>@Html.ActionLink("Feasibility Request", "FeasibilityRequest", "Feasibility", new { area = "Marketing" }, null)</li><li>@Html.ActionLink("Feasibility List", "FeasibilityRequestList", "Feasibility", new { area = "Marketing" }, null)</li></ul></li>');
+        }
+    }
+
+</script>
+

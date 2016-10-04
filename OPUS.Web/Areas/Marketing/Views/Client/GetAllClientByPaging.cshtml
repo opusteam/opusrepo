@@ -1,0 +1,35 @@
+﻿@model PagedList.IPagedList<OPUS.Domain.Client>
+@using PagedList.Mvc
+<h2>Welcome to area 51</h2>
+<p>@Html.ActionLink("Back to home page", "Index", "Home", new { area = String.Empty }, null)</p>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Office Address</th>
+            <th>Phone</th>
+            <th>Fax</th>
+            <th>Email</th>
+            <th>KAM</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var _client in Model)
+        {
+            <tr>
+                <td>@_client.Id</td>
+                <td>@_client.Name</td>
+                <td>@_client.OfficeAddress</td>
+                <td>@_client.Phone</td>
+                <td>@_client.Fax</td>
+                <td>@_client.Email</td>
+                <td>@_client.KamId</td>
+            </tr>}
+    </tbody>
+</table>
+<div class="pager">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+   @Html.PagedListPager(Model, page => Url.Action("GetAllClientByPaging",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

@@ -1,0 +1,34 @@
+﻿@model OPUS.Domain.SLAExpiredInfo
+@{
+    ViewBag.Title = "SLAInfo";
+}
+
+<h2>SLA Info</h2>
+<label>SLA Expired Date & Time: </label>
+@Html.DisplayFor(model => model.SLAEndDateTime)
+<br />
+<label>Time Left Actual: </label>
+@Html.DisplayFor(model => model.TimeLeftActual)
+<br />
+<label>Time Past Actual: </label>
+@Html.DisplayFor(model => model.TimePastActual)
+<br />
+<label>Remaining Time(Gross): </label>
+@Html.DisplayFor(model => model.TimeLeftGross)
+<br />
+<label>Remaining Time(Gross): </label>
+@Html.DisplayFor(model => model.GrossTimeLeftString)
+<br />
+<label>Time Past Actual(In Hours): </label>
+@Html.DisplayFor(model => model.TimePastInHours)
+<br />
+<label>Time Left Actual(In Hours): </label>
+@Html.DisplayFor(model => model.TimeLeftInHours)
+
+
+
+
+
+
+
+

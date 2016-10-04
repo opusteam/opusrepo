@@ -1,0 +1,220 @@
+﻿@model OPUS.Domain.ClientViewModel
+
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/Client.js"></script>
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Add New Client";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (TempData["Message"] != null)
+{ <div style="color:#00a525;font-weight:bold;">@TempData["Message"]</div>}
+
+@*@if (TempData["Error"] != null)
+    { <div style="color:#ff6a00;font-weight:bold;">@TempData["Error"]</div>}*@
+
+@using (Html.BeginForm("NewClient", "Client", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form", @id = "formNewClient" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @*@Html.ValidationSummary()*@
+
+    <div class="row">
+        <div class="col-md-12">
+            @*<h3>Client Details</h3>*@
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.Name) }) @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ShortName, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.ShortName, new { @class = "form-control", @placeholder = "Client Short Name" }) @Html.ValidationMessageFor(m => m.ShortName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.BusinessTypeId, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @*@Html.TextBoxFor(m => m.BusinessTypeId, new { @class = "form-control", @placeholder = "Business Type" }) @Html.ValidationMessageFor(m => m.BusinessTypeId)*@
+                        @Html.DropDownList("BusinessTypeId", (IEnumerable<SelectListItem>)ViewBag.BusinessTypeList, "--Select--", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.OfficeAddress, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(m => m.OfficeAddress, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.OfficeAddress) })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Phone, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.Phone) }) @Html.ValidationMessageFor(m => m.Phone)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Fax, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.Fax) }) @Html.ValidationMessageFor(m => m.Fax)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.Email) }) @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.WebSite, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.WebSite, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.WebSite) }) @Html.ValidationMessageFor(m => m.WebSite)
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.City, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.City) }) @Html.ValidationMessageFor(m => m.City)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Region, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.Region, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.Region) }) @Html.ValidationMessageFor(m => m.Region)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PostalCode, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.PostalCode) }) @Html.ValidationMessageFor(m => m.PostalCode)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.BillingDepartment, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.BillingDepartment, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.BillingDepartment) }) @Html.ValidationMessageFor(m => m.BillingDepartment)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.VatNo, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextBoxFor(m => m.VatNo, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.VatNo) }) @Html.ValidationMessageFor(m => m.VatNo)
+                    </div>
+                </div>
+                @*<div class="form-group">
+                        @Html.LabelFor(m => m.KamId, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+
+                            @Html.TextBoxFor(m => m.KamId, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.KamId) }) @Html.ValidationMessageFor(m => m.KamId)
+                        </div>
+                    </div>*@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Note, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+
+                        @Html.TextAreaFor(m => m.Note, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.Note) }) @Html.ValidationMessageFor(m => m.Note)
+                    </div>
+                </div>
+            </div><!-- End 2nd col-->
+        </div>
+
+        <div class="col-md-12">
+
+            @*<section id="contact-details-group">
+                    <h4 style="border-bottom: 1px solid #ddd; padding-bottom: 3px;">Contact Details</h4>
+                    <div class="contact-details">
+
+                        <div class="form-group">
+                            <label for="ContactName" class="col-md-3 control-label">Contact Name:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="ContactName[]" value="@Request.Form["contactname"]" class="form-control" />
+                                @Html.ValidationMessage("contactname")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactName" class="col-md-3 control-label">Phone:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="Phone[]" value="@Request.Form["Phone"]" class="form-control" />
+                                @Html.ValidationMessage("Phone")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactName" class="col-md-3 control-label">Fax:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="Fax[]" value="@Request.Form["Fax"]" class="form-control" />
+                                @Html.ValidationMessage("Fax")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactName" class="col-md-3 control-label">Email:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="Email[]" value="@Request.Form["Email"]" class="form-control" />
+                                @Html.ValidationMessage("Email")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactName" class="col-md-3 control-label">Address:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="Address[]" value="@Request.Form["Address"]" class="form-control" />
+                                @Html.ValidationMessage("Address")
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                    <div class="placer"></div>
+
+                    <div class="row">
+                        <button id="removeMore" class="btn btn-danger pull-right" style="margin-left:10px;"> - Remove</button>
+                        <button id="addMore" class="btn btn-warning pull-right"> + Add More</button>
+                    </div>
+                </section>*@
+
+            <div class="col-md-12">
+                <table id="tblAppendGrid"></table>
+            </div>
+
+
+            @*<button id="btnLoad" type="button">
+                    Demo: Load Data
+                </button>
+                <button id="btnSerialize" type="button">
+                    Demo: jQuery Serialize
+                </button>*@
+        </div>
+
+    </div>
+    <div class="clearfix"><br /></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-4">
+                    <input type="button" class="btn btn-primary" value="Save" onclick="ConfirmCreateClient()" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

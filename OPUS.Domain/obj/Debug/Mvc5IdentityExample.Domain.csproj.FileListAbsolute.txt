@@ -1,0 +1,5 @@
+D:\Mvc5IdentityExample-master\Mvc5IdentityExample-master\Mvc5IdentityExample\Mvc5IdentityExample.Domain\bin\Debug\Mvc5IdentityExample.Domain.dll
+D:\Mvc5IdentityExample-master\Mvc5IdentityExample-master\Mvc5IdentityExample\Mvc5IdentityExample.Domain\bin\Debug\Mvc5IdentityExample.Domain.pdb
+D:\Mvc5IdentityExample-master\Mvc5IdentityExample-master\Mvc5IdentityExample\Mvc5IdentityExample.Domain\obj\Debug\Mvc5IdentityExample.Domain.csprojResolveAssemblyReference.cache
+D:\Mvc5IdentityExample-master\Mvc5IdentityExample-master\Mvc5IdentityExample\Mvc5IdentityExample.Domain\obj\Debug\Mvc5IdentityExample.Domain.dll
+D:\Mvc5IdentityExample-master\Mvc5IdentityExample-master\Mvc5IdentityExample\Mvc5IdentityExample.Domain\obj\Debug\Mvc5IdentityExample.Domain.pdb

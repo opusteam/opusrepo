@@ -1,0 +1,518 @@
+﻿@model OPUS.Domain.FeasibilityViewModel
+
+
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/Feasibility.js"></script>
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@{
+    ViewBag.Title = "Active Feasibility Feedback";
+}*@
+
+<h2>@ViewBag.Title</h2>
+
+
+@if (TempData["Message"] != null)
+{ <div style="color:#00a525;font-weight:bold;">@TempData["Message"]</div>}
+
+@*@if (TempData["Error"] != null)
+    { <div style="color:#ff6a00;font-weight:bold;">@TempData["Error"]</div>}*@
+
+@using (Html.BeginForm("FeasibilityRequest", "Feasibility", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form", @id = "frmFeasibility" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary()
+
+    @Html.HiddenFor(model => model.FId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.FeasiblityType, new { @class = "col-md-2 control-label" })
+        <div class="col-md-2">
+            @Html.EnumDropDownListFor(model => model.FeasiblityType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ClientId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(model=> model.ClientName, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Requestfor, new { @class = "col-md-2 control-label" })
+        <div class="col-md-2">
+            @Html.EnumDropDownListFor(model => model.Requestfor, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ConnectivityType, new { @class = "col-md-2 control-label" })
+        <div class="col-md-2">
+            @Html.EnumDropDownListFor(model => model.ConnectivityType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+        </div>
+    </div>
+    <div id="clientConnLocation" class="form-group">
+        <div class="col-md-12">
+            <label class="col-md-2 control-label">Connectivity Location</label>
+            <fieldset id="clientlocationA" class="col-md-5">
+                <legend>Client Location A</legend>
+                <div class="form-group">                   
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.AddressOfClientLocationA, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">                   
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.LatitudeOfClientLocationA, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">                  
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.LongitudeOfClientLocationA, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="clientlocationB" class="col-md-5">
+                <legend>Client Location B</legend>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.AddressOfClientLocationB, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-5">
+
+                        @Html.TextBoxFor(model => model.LatitudeOfClientLocationB, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.LongitudeOfClientLocationB, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <!--Start SCL POP Block-->
+    <div id="SCLpopLocation" class="form-group">
+        <div class="col-md-12">
+            <label class="col-md-2 control-label">SCL POP</label>
+            <fieldset id="clientlocationA" class="col-md-5">
+                <legend>Location A</legend>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.AddressOfSCLPOPLocationA, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.LatitudeOfSCLPOPLocationA, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.LongitudeOfSCLPOPLocationA, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="clientlocationB" class="col-md-5">
+                <legend>Location B</legend>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.AddressOfSCLPOPLocationB, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-5">
+
+                        @Html.TextBoxFor(model => model.LatitudeOfSCLPOPLocationB, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(model => model.LongitudeOfSCLPOPLocationB, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <!--End SCL POP Block-->
+    <section id="passiveSection" style="display:none;">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConnectionType, new { @class = "col-md-2 control-label" })
+            <div class="col-md-2">
+                @Html.EnumDropDownListFor(model => model.ConnectionType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+            </div>
+        </div>
+
+    </section>
+    <section id="interfaceSection">
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsExistingInterfaceForLocationA, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5 row">
+             
+                <div class="col-md-4">
+                    <label>For location A</label> @Html.EnumDropDownListFor(model => model.IsExistingInterfaceForLocationA, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+               </div>
+                @if ((Model.IsExistingInterfaceForLocationA.Value).ToString() == "Yes")
+                {
+                    <div class="col-md-6">
+                        <label>Possibility</label> @Html.EnumDropDownListFor(model => model.IsPossibleWithExistingInterfaceForLocationA, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-12" style="margin-top:12px;">
+                         @Html.TextAreaFor(model => model.NotPossibleRemarks_WithExistingInterfaceForLacationA, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                       
+                    </div>
+                }
+            </div>
+            <div class="col-md-5">
+                <div class="col-md-4">
+                    <label>For location B</label> @Html.EnumDropDownListFor(model => model.IsExistingInterfaceForLocationB, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                </div>
+                @if ((Model.IsExistingInterfaceForLocationB.Value).ToString() == "Yes")
+                {
+                    <div class="col-md-6">
+                        <label>Possibility</label> @Html.EnumDropDownListFor(model => model.IsPossibleWithExistingInterfaceForLocationB,  new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                    if ((int)Model.IsPossibleWithExistingInterfaceForLocationB == 0)
+                    {
+                    <div class="col-md-12" style="margin-top:12px;">
+                        @Html.TextAreaFor(model => model.NotPossibleRemarks_WithExistingInterfaceForLacationB, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                        
+                    </div>
+                    }
+                 }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.InterfaceType, new { @class = "col-md-2 control-label" })
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.EnumDropDownListFor(model => model.InterfaceType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                </div>
+
+                <div class="col-md-2">
+                    @Html.EnumDropDownListFor(model => model.InterfaceTypeUnit, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="col-md-2">Possibility</label>
+                            <div class="col-md-5">
+                                @Html.EnumDropDownListFor(model => model.IsInterfaceTypePossible, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                            </div>
+                            @if ((int)Model.IsPossibleWithExistingInterfaceForLocationB == 0)
+                            {
+                            <div class="col-md-5">
+                                @Html.TextAreaFor(model => model.NotPossibleRemarks_IsInterfacecategoryPossible, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                              
+                            </div>
+                            }
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.InterfaceCategory, new { @class = "col-md-2 control-label" })
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.EnumDropDownListFor(model => model.InterfaceCategory, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                </div>
+                @if ((Model.InterfaceCategory.Value).ToString() == "Ethernet_Layer_2")
+                {
+                    <div class="col-md-2">
+                        @Html.EnumDropDownListFor(model => model.SubcategoryOfInterfaceCategory, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                }
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="col-md-2">Possibility</label>
+                            <div class="col-md-5">
+                                @Html.EnumDropDownListFor(model => model.IsInterfacecategoryPossible, "--Select--", new { @class = "form-control", disabled = "disabled" })
+                            </div>
+                            @if ((int)Model.IsInterfacecategoryPossible == 0)
+                            {
+                                <div class="col-md-5">
+                                    @Html.TextAreaFor(model => model.NotPossibleRemarks_IsInterfacecategoryPossible, new { @class = "form-control", disabled = "disabled" })
+
+                                </div>
+                            }
+                            @*<div class="col-md-5">
+                                <textarea cols="10" rows="1" style="width: 240px;" placeholder="Write your remarks here" class="form-control" name="NotPossibleRemarks_IsInterfacecategoryPossible" id="NotPossibleRemarks_IsInterfacecategoryPossible"></textarea>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ServiceType, new { @class = "col-md-2 control-label" })
+        <div class="col-md-2">
+            @Html.EnumDropDownListFor(model => model.ServiceType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+        </div>
+        <div class="col-md-2">&nbsp;</div>
+        <!--Start possibility block-->
+        <div class="col-md-5" style="padding-left: 30px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="col-md-2">Possibility</label>
+                    <div class="col-md-5">
+                        @Html.EnumDropDownListFor(model => model.IsServicePossibleWithSelectedServiceType, "--Select--", new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    @if ((int)Model.IsServicePossibleWithSelectedServiceType == 0)
+                    {
+                        <div class="col-md-5">
+                            @Html.TextAreaFor(model => model.NotPossibleRemarks_WithSelectedServiceType, new { @class = "form-control", style="width:100%;" , disabled = "disabled" })
+
+                        </div>
+                    }
+                    @*<div class="col-md-5">
+                        <textarea cols="10" rows="1" style="width: 240px;" placeholder="Write your remarks here" class="form-control" name="NotPossibleRemarks_WithSelectedServiceType" id="NotPossibleRemarks_WithSelectedServiceType"></textarea>
+                    </div>*@
+                </div>
+            </div>
+        </div><!--End possibility block-->
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.RequiredCapacityQuantity, new { @class = "col-md-2 control-label" })
+        <div class="row">
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.RequiredCapacityQuantity, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+            <div class="col-md-2">
+                @Html.EnumDropDownListFor(model => model.RequiredCapacityUnit, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+            </div>
+            <!--Start possibility block-->
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="col-md-2">Possibility</label>
+                        <div class="col-md-5">
+                            @Html.EnumDropDownListFor(model => model.IsRequiredCapacityDeliveryPossible, "--Select--", new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                        @if ((int)Model.IsRequiredCapacityDeliveryPossible == 0)
+                        {
+                            <div class="col-md-5">
+                                @Html.TextAreaFor(model => model.NotPossibleRemarks_IsRequiredCapacityDeliveryPossible, new { @class = "form-control", disabled = "disabled" })
+
+                            </div>
+                        }
+                        @*<div class="col-md-5">
+                            <textarea cols="10" rows="1" style="width: 240px;" placeholder="Write your remarks here" class="form-control" name="NotPossibleRemarks_IsRequiredCapacityDeliveryPossible" id="NotPossibleRemarks_IsRequiredCapacityDeliveryPossible"></textarea>
+                        </div>*@
+                    </div>
+                </div>
+            </div><!--End possibility block-->
+        </div>
+    </div>
+   
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastMileBy, new { @class = "col-md-2 control-label" })
+        <div class="col-md-2">          
+            @Html.EnumDropDownListFor(model => model.LastMileBy, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+        </div>
+    </div>
+    if ((Model.LastMileBy.Value).ToString() == "SCL")
+    {
+    <div class="form-group col-md-12">
+        <div class="col-md-12">
+            <label class="col-md-2 control-label"></label>
+            <fieldset id="clientlocationA" class="col-md-4">
+                <legend>For Location A</legend>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        @Html.EnumDropDownListFor(model => model.LastMileServiceTypeOfLocationA, "--Select--", new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-5">
+                       @Html.EnumDropDownListFor(model => model.IsPossibleLastMileServiceTypeOfLocationABySelectedServiceType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                    @if ((int)Model.IsPossibleLastMileServiceTypeOfLocationABySelectedServiceType == 0)
+                    {
+                        <div class="col-md-12" style="margin-top:12px;">
+                            @Html.TextAreaFor(model => model.NotPossibleRemarks_LastMileServiceTypeOfLocationABySelectedServiceType, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+
+                        </div>
+                    }
+                    @*<div class="col-md-12" style="margin-top:12px;">
+
+                        <textarea placeholder="Write your remarks here" class="form-control" name="NotPossibleRemarks_LastMileServiceTypeOfLocationABySelectedServiceType" id="NotPossibleRemarks_LastMileServiceTypeOfLocationABySelectedServiceType"></textarea>
+                    </div>*@
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.LastMileImplementationTypeOfLocationA, new { @class = "col-md-5 control-label" })*@
+                    <div class="col-md-7">
+                        @Html.EnumDropDownListFor(model => model.LastMileImplementationTypeOfLocationA, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.EnumDropDownListFor(model => model.IsPossibleLastMileImplementationTypeOfLocationAForSelectedImplementationType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                    @if ((int)Model.IsPossibleLastMileImplementationTypeOfLocationAForSelectedImplementationType == 0)
+                    {
+                        <div class="col-md-12" style="margin-top:12px;">
+                            @Html.TextAreaFor(model => model.NotPossibleRemarks_LastMileImplementationTypeOfLocationAForSelectedImplementationType, new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+
+                        </div>
+                    }
+                    @*<div class="col-md-12" style="margin-top:12px;">
+
+                        <textarea placeholder="Write your remarks here" class="form-control" name="NotPossibleRemarks_LastMileImplementationTypeOfLocationAForSelectedImplementationType" id="NotPossibleRemarks_LastMileImplementationTypeOfLocationAForSelectedImplementationType"></textarea>
+                    </div>*@
+                </div>
+            </fieldset>
+            <fieldset id="clientlocationB" class="col-md-4">
+                <legend>For Location B</legend>
+                <div class="form-group">
+                    <div class="col-md-7">
+                        @Html.EnumDropDownListFor(model => model.LastMileServiceTypeOfLocationB, "--Select--", new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.EnumDropDownListFor(model => model.IsPossibleLastMileServiceTypeOfLocationBBySelectedServiceType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                    @if ((int)Model.IsPossibleLastMileServiceTypeOfLocationBBySelectedServiceType == 0)
+                    {
+                        <div class="col-md-12" style="margin-top:12px;">
+                            @Html.TextAreaFor(model => model.NotPossibleRemarks_LastMileServiceTypeOfLocationBBySelectedServiceType, new { @class = "form-control", disabled = "disabled" })
+
+                        </div>
+                    }
+                    @*<div class="col-md-12" style="margin-top:12px;">
+
+                        <textarea placeholder="Write your remarks here" class="form-control" name="NotPossibleRemarks_LastMileServiceTypeOfLocationBBySelectedServiceType" id="NotPossibleRemarks_LastMileServiceTypeOfLocationBBySelectedServiceType"></textarea>
+                    </div>*@
+                </div>
+
+                <div class="form-group">
+                    
+                    <div class="col-md-7">
+                        @Html.EnumDropDownListFor(model => model.LastMileImplementationTypeOfLocationB, "--Select--", new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.EnumDropDownListFor(model => model.IsPossibleLastMileImplementationTypeOfLocationBForSelectedImplementationType, "--Select--", new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                    </div>
+                    @if ((int)Model.IsPossibleLastMileImplementationTypeOfLocationBForSelectedImplementationType == 0)
+                    {
+                        <div class="col-md-12" style="margin-top:12px;">
+                            @Html.TextAreaFor(model => model.NotPossibleRemarks_LastMileImplementationTypeOfLocationBForSelectedImplementationType, new { @class = "form-control", disabled = "disabled" })
+
+                        </div>
+                    }
+                    @*<div class="col-md-12" style="margin-top:12px;">
+
+                        <textarea placeholder="Write your remarks here" class="form-control" name="NotPossibleRemarks_LastMileImplementationTypeOfLocationBForSelectedImplementationType" id="NotPossibleRemarks_LastMileImplementationTypeOfLocationBForSelectedImplementationType"></textarea>
+                    </div>*@
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    }
+    <div class="form-group">
+        @Html.Label("Last Remarks", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.KAMRemarks, new { @class = "form-control resize", cols = "10", rows = "2", @readonly = "readonly" })
+                </div>
+                <div class="col-md-4">By KAM</div>
+            </div>
+            <div class="col-md-8"><hr /></div>
+            <div class="row">
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.PlanningRemarks, new { @class = "form-control resize", cols = "10", rows = "2", @readonly = "readonly" })
+                </div>
+                <div class="col-md-4">By Planning</div>
+            </div>
+         </div>
+    </div>
+    <section id="calcelreasonlist" class="col-md-12" style="display:none">
+        <lable class="col-md-2 control-label">Cancel Reason:</lable>
+        <div id="crList" class="form-group col-md-6"></div>
+       
+
+    </section>
+    <section id="workorder" style="clear:both;float:left;">
+        <lable class="col-md-2 control-label">Client Cable Info</lable>
+        <div id="woOptions" class="row col-md-8">
+            <div class="wofield_group row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.FromCableId, new { @class = "col-md-6 control-label" })
+                    <div class="col-md-6">
+                        @*@Html.TextBoxFor("FromCableId[]", new { @class = "form-control", @placeholder = @Html.DisplayNameFor(model => model.FromCableId) })*@
+                        <input type="text" name="FromCableId[]" id="FromCableId" class = "form-control" placeholder="@Html.DisplayNameFor(model => model.FromCableId)" />
+                       
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.ToCableId, new { @class = "col-md-6 control-label" })
+                    <div class="col-md-6">
+                        @*@Html.TextBoxFor(model => model.ToCableId, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(model => model.ToCableId) })*@
+                        <input type="text" name="ToCableId[]" id="ToCableId" class="form-control" placeholder="@Html.DisplayNameFor(model => model.ToCableId)" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.FromCoreColor, new { @class = "col-md-6 control-label" })
+                    <div class="col-md-6">
+                        @*@Html.TextBoxFor(model => model.FromCoreColor, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(model => model.FromCoreColor) })*@
+                        @*<input type="text" name="FromCoreColor[]" id="FromCoreColor" class="form-control" placeholder="@Html.DisplayNameFor(model => model.FromCoreColor)" />*@
+                        <select name="FromCoreColor[]" id="FromCoreColor" class="form-control">
+                            @{string[] ColorList = new string[] { "Blue", "Orange", "Green", "Brown", "Slate", "White", "Red", "Black", "Yellow", "Violet", "Pink", "Aqua" };}
+                            <option value="">--Select--</option>
+                            @foreach (var color in ColorList)
+                            {
+                                <option value="@color">@color</option>
+                            }
+                        </select>
+                        @*@Html.EnumDropDownListFor(model => model.FromCoreColor, "--Select--", new { @class = "form-control" })*@
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.ToCoreColor, new { @class = "col-md-6 control-label" })
+                    <div class="col-md-6">
+                        @*@Html.TextBoxFor(model => model.ToCoreColor, new { @class = "form-control", @placeholder = @Html.DisplayNameFor(model => model.ToCoreColor) })*@
+                        @*<input type="text" name="ToCoreColor[]" id="ToCoreColor" class="form-control" placeholder="@Html.DisplayNameFor(model => model.ToCoreColor)" />*@
+                        <select name="ToCoreColor[]" id="dowList" class = "form-control">
+                           
+                            <option value="">--Select--</option>
+                            @foreach (var color in ColorList)
+                            {
+                                <option value="@color">@color</option>
+                            }
+                        </select>
+
+                        @*@Html.EnumDropDownListFor(model => model.ToCoreColor, "--Select--", new { @class = "form-control", @name= "ToCoreColor[]" })*@
+                    </div>
+                </div>
+            </div>
+            <div class="wopplacer"></div>
+        </div>
+        <div class="col-md-2"><a id="wopadd-more" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Add More</a> <a style="margin-top:8px;" id="wopremoveMore" class="btn btn-danger"><i class="glyphicon glyphicon-plus"></i> Remove</a></div>
+    </section>
+
+
+    <div id="woRemarks" class="form-group">       
+        <lable class="col-md-2 control-label">Remarks</lable>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.KAMWorkOrderRemarks, new { @class = "form-control resize", cols = "10", rows = "5" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" id="btnWorkOrder" class="btn btn-primary col-md-2" value="Submit Work Order" onclick="SaveActiveWorkOrder('@User.Identity.Name')" />
+            <input type="button" id="CancelRequest" class="btn btn-danger col-md-2 pull-right" value="Cancel Request" />
+        </div>
+    </div>
+
+ }
+

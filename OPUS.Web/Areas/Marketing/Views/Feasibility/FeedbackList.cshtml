@@ -1,0 +1,107 @@
+﻿@model PagedList.IPagedList<OPUS.Domain.Feasibility>
+@using PagedList.Mvc
+<h2>Feedback List</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Type</th>
+            <th>Connectivty Type & Location</th>
+            <th>Connection Type</th>
+            <th>Service Type</th>
+            <th>Capacity Required</th>
+            <th>Last Mile by</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var _feasibility in Model)
+        {
+            <tr>
+                <td>@_feasibility.Id</td>
+                <td>@_feasibility.FeasiblityType</td>
+                <td>@_feasibility.ConnectivityType
+                    <a class="btn btn-xs btn-success" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#" id="loc"><span class="glyphicon glyphicon-eye-open" style="margin:3px 0 0 0"></span> Click To View</a>
+                    @*<button style="margin:7px 15px 17px 0;"  type="button" data-placement="bottom" data-toggle="popover" data-container="body" data-html="true" title="Client Location"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span>Click To View</button>*@
+                    <div class="popover-content hide">
+                        <table class="table-inner" border="0" cellpadding="5" cellspacing="1">
+                            <tr>
+                                <td>Location A</td>
+                                <td>Location B</td>
+                            </tr>
+                            <tr>
+                                <td style="border-right:1px solid #ddd;">
+                                    <strong>Address:</strong>@_feasibility.AddressOfClientLocationA<br />
+                                    <strong>Lat:</strong>@_feasibility.LatitudeOfClientLocationA<br />
+                                    <strong>Long:</strong>@_feasibility.LongitudeOfClientLocationA
+                                </td>
+                                <td>
+                                    <strong>Address:</strong>@_feasibility.AddressOfClientLocationB<br />
+                                    <strong>Lat:</strong>@_feasibility.LatitudeOfClientLocationB<br />
+                                    <strong>Long:</strong>@_feasibility.LongitudeOfClientLocationB
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    @if (_feasibility.FeasiblityType == "Passive")
+                    {
+                        if (_feasibility.ConnectionType == "Overhead")
+                        {
+                            <i class="glyphicon glyphicon-export"></i>
+                        }
+                        else
+                        {
+                            <i class="glyphicon glyphicon-import"></i>
+                        }
+
+                                @_feasibility.ConnectionType
+                                
+                        
+                    }else { <span>NA</span>}
+
+</td>
+                <td>@_feasibility.ServiceType</td>
+                <td>@_feasibility.RequiredCapacityQuantity @_feasibility.RequiredCapacityUnit</td>
+                <td>@_feasibility.LastMileBy
+                @if (_feasibility.LastMileBy == "SCL")
+                {
+                    <a class="btn btn-xs btn-success" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#" id="lmbloc"><span class="glyphicon glyphicon-eye-open" style="margin:3px 0 0 0"></span> Click To View</a>
+                    <div class="popover-content hide">
+                        <table class="table-inner" border="0" cellpadding="5" cellspacing="1">
+                            <tr>
+                                <td>Location A</td>
+                                <td>Location B</td>
+                            </tr>
+                            <tr>
+                                <td style="border-right:1px solid #ddd;">
+                                    <strong>Service Type:</strong>@_feasibility.LastMileServiceTypeOfLocationA<br />
+                                    <strong>Imp. Type:</strong>@_feasibility.LastMileImplementationTypeOfLocationA
+                                </td>
+                                <td>
+                                    <strong>Service Type:</strong>@_feasibility.LastMileServiceTypeOfLocationB<br />
+                                    <strong>Imp. Type:</strong>@_feasibility.LastMileImplementationTypeOfLocationB
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = _feasibility.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = _feasibility.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = _feasibility.Id })*@
+                    <a href="@Url.Action("FeasibilityFeedback", "Feasibility", new { id= _feasibility.Id})" title="Edit"><i class="glyphicon glyphicon-pencil text-warning"></i></a>
+                    <a href="@Url.Action("Details", "Feasibility", new { id= _feasibility.Id})" title="View details"><i class="glyphicon glyphicon-fullscreen text-success"></i></a>
+                    <a href="@Url.Action("Delete", "Feasibility", new { id= _feasibility.Id})" title="Cancel"><i class="glyphicon glyphicon-remove-sign text-danger"></i></a>
+                </td>
+            </tr>}
+    </tbody>
+</table>
+<div class="pager">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("FeedbackList",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

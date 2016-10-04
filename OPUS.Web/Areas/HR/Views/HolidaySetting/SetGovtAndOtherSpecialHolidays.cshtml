@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "SetGovtAndOtherSpecialHolidays";
+}
+@if (ViewBag.Msg != null & ViewBag.Msg is string) //int or Foo or anyObject
+            {
+    <div class="row">
+        <br />
+        <div class="alert alert-danger col-sm-offset-2 col-md-8">
+            @ViewBag.Msg
+        </div>
+    </div>
+}
+<h2>Set Govt. And Other Special Holidays</h2>
+@using (Html.BeginForm("SetGovtAndOtherSpecialHolidays", "HolidaySetting",FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "frmotherholidaysetting" }))
+{
+    <label>Date from</label>
+    <input type="date" name="DateFrm" id="DateFrm" class="form-control" />
+    <br />
+    <label>Date to</label>
+    <input type="date" name="DateTo" id="DateTo" class="form-control"/>
+    <br />
+    <label>Holiday Type</label>
+    <select name="HolidayType" id="HolidayType" class="form-control">
+        <option>---Select---</option>
+        <option value="3">Govt.</option>
+        <option value="4">Summit-Special</option>
+    </select>
+    <br />
+    <label>Description</label>
+    <textarea id="Description" name="Description" class="form-control"></textarea>
+    <br />
+    <input type="submit" class="btn btn-primary col-md-2" value="Set Holiday" />
+}
+
+
+

@@ -1,0 +1,48 @@
+﻿@model OPUS.Domain.VMHolidaySetting
+@{
+    ViewBag.Title = "Set Holiday";
+}
+@if (ViewBag.Msg != null & ViewBag.Msg is string) //int or Foo or anyObject
+            {
+<div class="row">
+    <br />
+    <div class="alert alert-danger col-sm-offset-2 col-md-8">
+        @ViewBag.Msg
+    </div>
+</div>
+}
+<h2>Set Holiday</h2>
+@using (Html.BeginForm("SetWeeklyHoliday", "HolidaySetting", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form", @id = "frmholidaysetting" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.WeeklyHoliday, new { @class = "col-md-2 control-label" })
+        <div class="col-md-2">
+            @Html.EnumDropDownListFor(model => model.WeeklyHoliday, "--Select--", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.year, new { @class = "col-md-2 control-label" })
+        <div class="col-md-2">
+            <select name="year" id="year" class = "form-control">
+                <option value="2016">2016</option>
+                <option value="2016">2017</option>
+                <option value="2016">2018</option>
+                <option value="2016">2019</option>
+                <option value="2016">2020</option>
+                <option value="2016">2021</option>
+                <option value="2016">2022</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary col-md-2" value="Set Holiday" />
+        </div>
+    </div>
+}

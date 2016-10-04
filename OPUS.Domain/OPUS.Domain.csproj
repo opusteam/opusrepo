@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{412D1589-9EB6-462E-9098-D5AC3AD652B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OPUS.Domain</RootNamespace>
+    <AssemblyName>OPUS.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Claim.cs" />
+    <Compile Include="Entities\ExternalLogin.cs" />
+    <Compile Include="Entities\OfficeTiming\OfficeTiming.cs" />
+    <Compile Include="Entities\Process\AssignedSLA.cs" />
+    <Compile Include="Entities\Process\BusinessType.cs" />
+    <Compile Include="Entities\Process\CancelReason.cs" />
+    <Compile Include="Entities\Process\Client.cs" />
+    <Compile Include="Entities\Process\ContactDetail.cs" />
+    <Compile Include="Entities\Process\Department.cs" />
+    <Compile Include="Entities\Process\Feasibility.cs" />
+    <Compile Include="Entities\Process\FinalPlan.cs" />
+    <Compile Include="Entities\Process\InCAttachedFile.cs" />
+    <Compile Include="Entities\Process\InCImp.cs" />
+    <Compile Include="Entities\Process\InputsForWorkorder.cs" />
+    <Compile Include="Entities\Process\Menu.cs" />
+    <Compile Include="Entities\Process\OverHeadAttachedFile.cs" />
+    <Compile Include="Entities\Process\OverHeadImp.cs" />
+    <Compile Include="Entities\Process\ProcessRemark.cs" />
+    <Compile Include="Entities\Process\SLARuleSet.cs" />
+    <Compile Include="Entities\Process\UnderGroundAttachedFile.cs" />
+    <Compile Include="Entities\Process\UnderGroundImp.cs" />
+    <Compile Include="Entities\Process\UserMenuMapping.cs" />
+    <Compile Include="Entities\Process\ViewModel\ClientViewModel.cs" />
+    <Compile Include="Entities\Process\ViewModel\ContactViewModel.cs" />
+    <Compile Include="Entities\Process\ViewModel\FeasibilityViewModel.cs" />
+    <Compile Include="Entities\Process\ViewModel\FinalPlanViewModel.cs" />
+    <Compile Include="Entities\Process\ViewModel\PlanningFeedBackOnActiveFeasibility.cs" />
+    <Compile Include="Entities\Process\ViewModel\PlanningFeedBackOnPassiveFeasibility.cs" />
+    <Compile Include="Entities\Process\ViewModel\TmpVMSLA.cs" />
+    <Compile Include="Entities\Process\ViewModel\VMAssignedSLA.cs" />
+    <Compile Include="Entities\Process\ViewModel\VMHolidaySetting.cs" />
+    <Compile Include="Entities\Process\ViewModel\VWMGovtAndOtherHoliday.cs" />
+    <Compile Include="Entities\Process\ViewModel\VWMSLAExpiredInfo.cs" />
+    <Compile Include="Entities\Process\ViewModel\WorkOrderCoreViewModel.cs" />
+    <Compile Include="Entities\Process\ViewModel\WorkOrderViewModel.cs" />
+    <Compile Include="Entities\Process\WorkOrder.cs" />
+    <Compile Include="Entities\Process\WorkOrderDetail.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Enums\CapacityRequirementUnitEnum.cs" />
+    <Compile Include="Enums\ColorCodeEnum.cs" />
+    <Compile Include="Enums\ConnectionTypeEnum.cs" />
+    <Compile Include="Enums\ConnectivityTypeEnum.cs" />
+    <Compile Include="Enums\DeparmentEnum.cs" />
+    <Compile Include="Enums\EventType.cs" />
+    <Compile Include="Enums\ExistingInterfaceEnum.cs" />
+    <Compile Include="Enums\FeasibilityRequestForEnum.cs" />
+    <Compile Include="Enums\FeasibilityStatusEnum.cs" />
+    <Compile Include="Enums\FeasibilityTypeEnum.cs" />
+    <Compile Include="Enums\HolidayTypesEnum.cs" />
+    <Compile Include="Enums\InterfaceCategoryEnum.cs" />
+    <Compile Include="Enums\InterfaceEthernetLayer2SubCategoryEnum.cs" />
+    <Compile Include="Enums\InterfaceTypeEnum.cs" />
+    <Compile Include="Enums\InterfaceTypeUnitEnum.cs" />
+    <Compile Include="Enums\LastMileByEnum.cs" />
+    <Compile Include="Enums\LastMileImplementationTypeEnum.cs" />
+    <Compile Include="Enums\LastMileServiceTypeEnum.cs" />
+    <Compile Include="Enums\PossibleNotPossibleEnum.cs" />
+    <Compile Include="Enums\ProcessRequestForEnum.cs" />
+    <Compile Include="Enums\RequestForEnum.cs" />
+    <Compile Include="Enums\ServiceTypeEnum.cs" />
+    <Compile Include="Enums\SLAStatusEnum.cs" />
+    <Compile Include="Enums\SLATypeEnum.cs" />
+    <Compile Include="Enums\UserRoleEnum.cs" />
+    <Compile Include="Enums\WeekDaysEnum.cs" />
+    <Compile Include="Enums\YesNoEnum.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IAssignedSLARepository.cs" />
+    <Compile Include="Repositories\IcancelReasonRepository.cs" />
+    <Compile Include="Repositories\IClientContactDetailRepository.cs" />
+    <Compile Include="Repositories\IClientRepository.cs" />
+    <Compile Include="Repositories\IExternalLoginRepository.cs" />
+    <Compile Include="Repositories\IFeasibilityRepository.cs" />
+    <Compile Include="Repositories\IFinalPlanRepository.cs" />
+    <Compile Include="Repositories\IHolidaySettingRepository.cs" />
+    <Compile Include="Repositories\IMenuRepository.cs" />
+    <Compile Include="Repositories\IProcessRemarkRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IRoleRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\IWorkOrderDetailRepository.cs" />
+    <Compile Include="Repositories\IWorkOrderRepository.cs" />
+    <Compile Include="Services\ClientService.cs" />
+    <Compile Include="Services\FeasibilityService.cs" />
+    <Compile Include="Services\HolidayService.cs" />
+    <Compile Include="Services\IClientService.cs" />
+    <Compile Include="Services\IFeasibilityService.cs" />
+    <Compile Include="Services\IGenericService.cs" />
+    <Compile Include="Services\IHolidayService.cs" />
+    <Compile Include="Services\IMenuService.cs" />
+    <Compile Include="Services\IPlanningService.cs" />
+    <Compile Include="Services\IWorkOrderService.cs" />
+    <Compile Include="Services\PlanningService.cs" />
+    <Compile Include="Services\WorkOrderService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

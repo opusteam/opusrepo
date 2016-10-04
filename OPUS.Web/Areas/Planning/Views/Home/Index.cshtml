@@ -1,0 +1,32 @@
+﻿@model List<OPUS.Domain.VWMSLAExpiredInfo>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2><i class="glyphicon glyphicon-dashboard"></i> Planning Dashboard</h2>
+@foreach (var sla in Model)
+{
+    <table class="table">
+        <tr>
+            <td>
+                <label>SLA ID:</label><br /> @Html.DisplayFor(modelItem => sla.SLAId)
+            </td>
+            <td>
+                <label>SLA StartDate & Time:</label><br />@Html.DisplayFor(modelItem => sla.SLAStartDateTime)
+            </td>
+            <td>
+                <label>Actual Time Left(In Hours):</label><br />@Html.DisplayFor(modelItem => sla.TimeLeftInHours)
+            </td>
+            <td>
+                <label>Gross Time Left:</label><br />@Html.DisplayFor(modelItem => sla.GrossTimeLeftString)
+            </td>
+            <td>
+                <label>SLA EndDate & Time:</label><br />@Html.DisplayFor(modelItem => sla.SLAEndDateTime)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+}
+
